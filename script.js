@@ -1,55 +1,6 @@
 // Pharmacy Management System - Landing Page Scripts
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Mobile Navigation Toggle
-    const navToggle = document.querySelector('.nav-toggle');
-    const navLinks = document.querySelector('.nav-links');
-
-    if (navToggle && navLinks) {
-        navToggle.addEventListener('click', function() {
-            navToggle.classList.toggle('active');
-            navLinks.classList.toggle('active');
-            // Prevent body scroll when menu is open
-            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
-        });
-
-        // Close menu when clicking a link
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', function() {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.style.overflow = '';
-            });
-        });
-
-        // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
-            if (!navToggle.contains(e.target) && !navLinks.contains(e.target) && navLinks.classList.contains('active')) {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Close menu on escape key
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && navLinks.classList.contains('active')) {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-
-        // Close menu on resize if switching to desktop
-        window.addEventListener('resize', function() {
-            if (window.innerWidth > 768 && navLinks.classList.contains('active')) {
-                navToggle.classList.remove('active');
-                navLinks.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        });
-    }
-
     // Smooth scroll for anchor links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
@@ -93,11 +44,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Observe cards and screenshot items for animation
-    document.querySelectorAll('.feature-card, .download-card, .pricing-card, .screenshot-item, .contact-card').forEach(el => {
+    // Observe feature cards
+    document.querySelectorAll('.feature-card, .download-card, .pricing-card').forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(20px)';
-        el.style.transition = 'opacity 0.5s ease-out, transform 0.5s ease-out';
+        el.style.transition = 'opacity 0.5s, transform 0.5s';
         observer.observe(el);
     });
 
