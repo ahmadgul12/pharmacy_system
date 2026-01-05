@@ -110,6 +110,114 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         </style>
     `);
+
+    // Lightbox functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const lightboxCaption = document.getElementById('lightbox-caption');
+    const lightboxClose = document.querySelector('.lightbox-close');
+    const lightboxPrev = document.querySelector('.lightbox-prev');
+    const lightboxNext = document.querySelector('.lightbox-next');
+
+    if (lightbox) {
+        const screenshots = document.querySelectorAll('.screenshot-item');
+        let currentIndex = 0;
+
+        // Get all images and their captions
+        const images = [];
+        screenshots.forEach((item, index) => {
+            const img = item.querySelector('img');
+            if (img) {
+                images.push({
+                    src: img.src,
+                    alt: img.alt,
+                    caption: img.alt
+                });
+
+                // Click to open lightbox
+                item.addEventListener('click', function() {
+                    openLightbox(index);
+                });
+            }
+        });
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightboxImage();
+            lightbox.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function updateLightboxImage() {
+            if (images[currentIndex]) {
+                lightboxImg.src = images[currentIndex].src;
+                lightboxImg.alt = images[currentIndex].alt;
+                lightboxCaption.textContent = images[currentIndex].caption;
+            }
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateLightboxImage();
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateLightboxImage();
+        }
+
+        // Event listeners
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightboxNext.addEventListener('click', showNext);
+        lightboxPrev.addEventListener('click', showPrev);
+
+        // Close on background click
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') showNext();
+            if (e.key === 'ArrowLeft') showPrev();
+        });
+
+        // Touch swipe support
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        lightbox.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        }, { passive: true });
+
+        lightbox.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        }, { passive: true });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    showNext(); // Swipe left
+                } else {
+                    showPrev(); // Swipe right
+                }
+            }
+        }
+    }
 });
 
 // Track download clicks (for analytics)
