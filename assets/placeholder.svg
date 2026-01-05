@@ -1,0 +1,17 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2563eb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg)" rx="16"/>
+  <rect x="20" y="20" width="760" height="40" fill="rgba(255,255,255,0.1)" rx="8"/>
+  <circle cx="45" cy="40" r="8" fill="#ef4444"/>
+  <circle cx="70" cy="40" r="8" fill="#f59e0b"/>
+  <circle cx="95" cy="40" r="8" fill="#22c55e"/>
+  <rect x="20" y="80" width="180" height="400" fill="rgba(255,255,255,0.1)" rx="8"/>
+  <rect x="220" y="80" width="560" height="400" fill="rgba(255,255,255,0.15)" rx="8"/>
+  <text x="400" y="290" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle">App Screenshot</text>
+  <text x="400" y="320" font-family="Arial, sans-serif" font-size="14" fill="rgba(255,255,255,0.7)" text-anchor="middle">Replace with actual screenshots</text>
+</svg>
