@@ -1,8 +1,8 @@
 {
-  "version": "1.0.2",
-  "build_number": "2",
+  "version": "1.0.0",
+  "build_number": "1",
   "download_url": "https://ahmadgul12.github.io/pharmacy_system/releases/PharmacySystem_Setup_1.0.2.exe",
   "release_notes": "Second release of Pharmacy Management System.\n\n- Complete POS system\n- Inventory management\n- Customer tracking\n- Prescription management\n- Reports and analytics",
-  "force_update": true,
-  "min_version": "1.0.0"
+  "force_update": false,
+  "min_version": 
 }
